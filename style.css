@@ -1,0 +1,18 @@
+form {
+  max-width: 250px;
+  display: grid;
+  grid-template-columns: auto;
+  border: 1px solid #000;
+  padding: 20px;
+  background:#e6b171;
+  border-radius: 20px;
+  justify-content: center;
+  gap: 10px;
+}
+form input {
+  height: 30px;
+  border: none;
+  background: #0000004f;
+  color: rebeccapurple;
+  border-radius: 8px;
+}
