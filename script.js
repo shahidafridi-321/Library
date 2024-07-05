@@ -11,14 +11,9 @@ function Book(title, author, pages, read) {
 
 // function that will take data from the user , create book object from that data and store the object to the database(array)
 
-function addBookToLibrary() {
-  let title = prompt('Book name ? ', 'Hobbit');
-  let author = prompt('Author of the Book? ', 'JJR');
-  let pages = parseInt(prompt('How many pages the book has?', 299));
-  let read = Boolean(prompt('read the book yet?', true));
-
+function addBookToLibrary(title, author, pages, read) {
   let book = new Book(title, author, pages, read);
-  myLibrary.push(book)
+  myLibrary.push(book);
 }
 // DOM element selection
 let body = document.querySelector('body');
@@ -27,57 +22,55 @@ let newBook = document.querySelector('.newBook');
 newBook.addEventListener('click', () => {
 
     let form = document.createElement('form');
-    body.appendChild(form);
 
-    let inputTitleLabel = document.createElement('label');
-    form.appendChild(inputTitleLabel);
-    inputTitleLabel.textContent = 'Title: ';
-    inputTitleLabel.setAttribute('for', 'title');
-    let inputTitle = document.createElement('input');
-    form.appendChild(inputTitle);
-    inputTitle.setAttribute('id', 'title');
-    inputTitle.setAttribute('type', 'text');
+    // helper function
 
+    function createInputElement(textLabel,id,type){
 
-    let inputAuthorLabel = document.createElement('label');
-    form.appendChild(inputAuthorLabel);
-    inputAuthorLabel.textContent = 'Author: ';
-    inputAuthorLabel.setAttribute('for', 'author');
-    let inputAuthor = document.createElement('input');
-    form.appendChild(inputAuthor);
-    inputAuthor.setAttribute('id', 'author');
-    inputAuthor.setAttribute('type', 'text');
+      const label = document.createElement('label');
+      label.textContent = `${textLabel}`;
+      label.setAttribute('for',id);
+      form.appendChild(label);
 
+      const input = document.createElement('input');
+      input.setAttribute('id',id);
+      input.setAttribute('type',type);
+      form.appendChild(input);
 
-    let inputPagesLabel = document.createElement('label');
-    form.appendChild(inputPagesLabel);
-    inputPagesLabel.textContent = 'Pages: ';
-    inputPagesLabel.setAttribute('for', 'pages');
-    let inputPages = document.createElement('input');
-    form.appendChild(inputPages);
-    inputPages.setAttribute('id', 'pages');
-    inputPages.setAttribute('type', 'number');
+    }
 
+    createInputElement('Title','title','text');
+    createInputElement('Author','author','text');
+    createInputElement('Pages','pages','number');
+    createInputElement('Read','read','text');
 
-    let inputReadLabel = document.createElement('label');
-    form.appendChild(inputReadLabel);
-    inputReadLabel.textContent = 'Read: ';
-    inputReadLabel.setAttribute('for', 'read');
-    let inputRead = document.createElement('input');
-    form.appendChild(inputRead);
-    inputRead.setAttribute('id', 'read');
-    inputRead.setAttribute('type', 'text');
+    const submissionBtn = document.createElement('button');
+    submissionBtn.textContent = 'Add Book';
+    submissionBtn.setAttribute('type','submit');
+    form.appendChild(submissionBtn);
 
-    body.removeChild(newBook);
+    body.append(form);
+    newBook.style.display='none';
+
+    submissionBtn.addEventListener('click',(e)=>{
+      e.preventDefault();
+      let title = document.querySelector('#title').value;
+      let author = document.querySelector('#author').value;
+      let pages = document.querySelector('#pages').value;
+      let read = document.querySelector('#read').value;
+
+      addBookToLibrary(title,author,pages,read === true);
+      newBook.style.display = 'block';
+      display();
+      body.removeChild(form);
+    });
 
 });
 
 // function for displaying the books on the page
 
-myLibrary.forEach(item => {
-  let card = document.createElement('div');
-  body.appendChild(card);
-  card.innerHTML = `<h2>Title ${item.title}</h2><h2>Author ${item.author}</h2><h2>Pages ${item.pages}</h2><h2>Read ${item.read}</h2>`
-});
-
-console.log();
+function display(){
+  myLibrary.forEach(item => {
+    console.table(item);
+  });
+}

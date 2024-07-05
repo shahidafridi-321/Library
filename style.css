@@ -15,4 +15,5 @@ form input {
   background: #0000004f;
   color: rebeccapurple;
   border-radius: 8px;
+  visibility: hidden;
 }
