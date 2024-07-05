@@ -35,8 +35,8 @@ newBook.addEventListener('click', () => {
       const input = document.createElement('input');
       input.setAttribute('id',id);
       input.setAttribute('type',type);
+      input.setAttribute('required',true);
       form.appendChild(input);
-
     }
 
     createInputElement('Title','title','text');
@@ -61,8 +61,8 @@ newBook.addEventListener('click', () => {
 
       addBookToLibrary(title,author,pages,read === true);
       newBook.style.display = 'block';
-      display();
       body.removeChild(form);
+      display();
     });
 
 });
@@ -70,7 +70,9 @@ newBook.addEventListener('click', () => {
 // function for displaying the books on the page
 
 function display(){
-  myLibrary.forEach(item => {
-    console.table(item);
+  myLibrary.forEach((item)=>{
+    console.log(item);
   });
 }
+
+

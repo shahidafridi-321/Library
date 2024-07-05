@@ -1,3 +1,34 @@
+*/
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+* {
+  margin: 0;
+}
+body {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  background: #0f172a;
+  color: #064e3b;
+  padding: 60px 30px;
+}
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+input, button, textarea, select {
+  font: inherit;
+}
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}
+#root, #__next {
+  isolation: isolate;
+}
+.logo{
+  transform: rotate(10deg);
+}
+
 form {
   max-width: 250px;
   display: grid;
@@ -15,5 +46,4 @@ form input {
   background: #0000004f;
   color: rebeccapurple;
   border-radius: 8px;
-  visibility: hidden;
 }
