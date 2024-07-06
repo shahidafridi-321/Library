@@ -29,6 +29,7 @@ let displayBtn = document.querySelector('.displayBtn');
 let displayContainer = document.querySelector('.output-display');
 
 
+
 // event listener to the newbook button
 newBook.addEventListener('click', () => {
 
@@ -86,6 +87,9 @@ newBook.addEventListener('click', () => {
 });
 
 
+// added an event listener to display button 
+displayBtn.addEventListener('click', display);
+
 // function for displaying the books on the page
 function display() {
   myLibrary.forEach((item) => {
@@ -101,24 +105,43 @@ function display() {
   });
 }
 // its a helper function created for creating elements
+// It's a helper function created for creating elements
 function createElements(container, e) {
   let title = document.createElement('p');
   let author = document.createElement('p');
   let pages = document.createElement('p');
   let read = document.createElement('p');
 
-  title.textContent = `Book Name : ${e.title}`;
-  author.textContent = `Written By : ${e.author}`;
+  // Setting content in elements
+  title.textContent = `Book Name: ${e.title}`;
+  author.textContent = `Written By: ${e.author}`;
   pages.textContent = `Contains ${e.pages} Pages`;
-  read.textContent = `Read ? : ${e.read}`;
+  read.textContent = `Read? : ${e.read}`;
 
   container.appendChild(title);
   container.appendChild(author);
   container.appendChild(pages);
   container.appendChild(read);
+
+  let deletBtn = document.createElement('button');
+  deletBtn.textContent = 'Delete';
+  deletBtn.classList.add('delete-btn');
+  container.appendChild(deletBtn);
+
+  deletBtn.addEventListener('click', () => {
+    container.remove();
+    displayBtn.style.display = 'block';
+  });
 }
 
-// added an event listener to display button 
-displayBtn.addEventListener('click', display);
+
+// function for deleting the book
+// let delBtn = document.querySelector('.delete-btn');
+// delBtn.
+
+function deleteBook() {
+
+}
+
 
 

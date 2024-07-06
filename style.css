@@ -112,7 +112,8 @@ h6 {
 
 .newBook,
 .subBtn,
-.displayBtn {
+.displayBtn,
+.delete-btn {
   width: auto;
   justify-self: center;
   background: none;
@@ -124,10 +125,12 @@ h6 {
   font-family: roboto mono;
   font-weight: bold;
   transition: 0.8s all;
+  margin-top: 10px;
 }
 
 .newBook:hover,
-.displayBtn:hover {
+.displayBtn:hover,
+.delete-btn:hover{
   background: #e879f9;
   color: #0f172a;
   transition: 0.8s all;
