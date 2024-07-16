@@ -57,7 +57,8 @@ h6 {
     'header header header'
     'mainContent mainContent mainContent'
     'displayBtn displayBtn displayBtn'
-    'output output output';
+    'output output output'
+    'footer footer footer';
 }
 
 .header-section {
@@ -216,4 +217,18 @@ h6 {
   font-size: 1.2rem;
   color: #67e8f9;
 
+}
+.footer{
+  grid-area: footer;
+  background:#064e3b;
+  text-align: center;
+  height: 300%;
+  display: grid;
+  place-content: center;
+  
+}
+.footer p {
+  color: #67e8f9;
+  font-size: 2rem;
+  font-family: roboto mono;
 }
