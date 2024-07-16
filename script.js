@@ -1,12 +1,14 @@
 // An Array for storing the book objects acts as a database..
 let myLibrary = [];
 
-// a constructor function for book objects creations..
-function Book(title, author, pages, read) {
-  this.title = title;
-  this.author = author;
-  this.pages = pages;
-  this.read = read;
+// book class
+class Book {
+  constructor(title, author, pages, read) {
+    this.title = title;
+    this.author = author;
+    this.pages = pages;
+    this.read = read;
+  }
 }
 
 // function that will take data from the user , create book object from that data and store the object to the database(array)
@@ -15,6 +17,7 @@ function addBookToLibrary(title, author, pages, read) {
   let book = new Book(title, author, pages, read);
   myLibrary.push(book);
 }
+
 // DOM element selection
 // selects main content container
 let mainContent = document.querySelector('.main-content');
@@ -27,8 +30,6 @@ let displayBtn = document.querySelector('.displayBtn');
 
 // selects the display container
 let displayContainer = document.querySelector('.output-display');
-
-
 
 // event listener to the newbook button
 newBook.addEventListener('click', () => {
@@ -86,7 +87,6 @@ newBook.addEventListener('click', () => {
 
 });
 
-
 // added an event listener to display button 
 displayBtn.addEventListener('click', display);
 
@@ -104,6 +104,7 @@ function display() {
 
   });
 }
+
 // its a helper function created for creating elements
 // It's a helper function created for creating elements
 function createElements(container, e) {
@@ -133,15 +134,3 @@ function createElements(container, e) {
     displayBtn.style.display = 'block';
   });
 }
-
-
-// function for deleting the book
-// let delBtn = document.querySelector('.delete-btn');
-// delBtn.
-
-function deleteBook() {
-
-}
-
-
-

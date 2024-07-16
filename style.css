@@ -131,7 +131,7 @@ h6 {
 
 .newBook:hover,
 .displayBtn:hover,
-.delete-btn:hover{
+.delete-btn:hover {
   background: #e879f9;
   color: #0f172a;
   transition: 0.8s all;
@@ -218,15 +218,17 @@ h6 {
   color: #67e8f9;
 
 }
-.footer{
+
+.footer {
   grid-area: footer;
-  background:#064e3b;
+  background: #064e3b;
   text-align: center;
   height: 300%;
   display: grid;
   place-content: center;
-  
+
 }
+
 .footer p {
   color: #67e8f9;
   font-size: 2rem;
