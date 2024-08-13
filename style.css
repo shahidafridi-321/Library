@@ -47,18 +47,17 @@ h6 {
   isolation: isolate;
 }
 
-
 .main-container {
   width: 100%;
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   gap: 15px;
   grid-template-areas:
-    'header header header'
-    'mainContent mainContent mainContent'
-    'displayBtn displayBtn displayBtn'
-    'output output output'
-    'footer footer footer';
+    "header header header"
+    "mainContent mainContent mainContent"
+    "displayBtn displayBtn displayBtn"
+    "output output output"
+    "footer footer footer";
 }
 
 .header-section {
@@ -83,7 +82,7 @@ h6 {
 }
 
 .main-title {
-  font-family: 'Ga Maamli';
+  font-family: "Ga Maamli";
   color: #67e8f9;
   letter-spacing: 5px;
   align-self: center;
@@ -96,7 +95,6 @@ h6 {
   grid-template-columns: repeat(1, auto);
   gap: 30px;
   padding: 30px 20px;
-
 }
 
 .description {
@@ -146,7 +144,6 @@ h6 {
   color: #0f172a;
   transform: skew(40deg, 0);
   transition: 1.8s all;
-
 }
 
 .data-form {
@@ -172,7 +169,6 @@ h6 {
   color: #997272;
   font-family: roboto mono;
   font-size: 1.3rem;
-
 }
 
 .data-form input:valid {
@@ -201,7 +197,6 @@ h6 {
   gap: 20px;
   grid-area: output;
   padding: 100px 20px;
-
 }
 
 .display-card {
@@ -216,17 +211,15 @@ h6 {
   font-family: roboto;
   font-size: 1.2rem;
   color: #67e8f9;
-
 }
 
 .footer {
   grid-area: footer;
   background: #064e3b;
   text-align: center;
-  height: 300%;
+  height: 100%;
   display: grid;
   place-content: center;
-
 }
 
 .footer p {

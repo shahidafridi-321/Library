@@ -1,7 +1,7 @@
 // An Array for storing the book objects acts as a database..
 let myLibrary = [];
 
-// book class
+// Book class
 class Book {
   constructor(title, author, pages, read) {
     this.title = title;
@@ -11,126 +11,119 @@ class Book {
   }
 }
 
-// function that will take data from the user , create book object from that data and store the object to the database(array)
-
+// Function to add a book to the library
 function addBookToLibrary(title, author, pages, read) {
   let book = new Book(title, author, pages, read);
   myLibrary.push(book);
 }
 
 // DOM element selection
-// selects main content container
-let mainContent = document.querySelector('.main-content');
+let mainContent = document.querySelector(".main-content");
+let newBook = document.querySelector(".newBook");
+let displayBtn = document.querySelector(".displayBtn");
+let displayContainer = document.querySelector(".output-display");
 
-// selects the newBook button
-let newBook = document.querySelector('.newBook');
-
-// selects display button
-let displayBtn = document.querySelector('.displayBtn');
-
-// selects the display container
-let displayContainer = document.querySelector('.output-display');
-
-// event listener to the newbook button
-newBook.addEventListener('click', () => {
-
-  let form = document.createElement('form');
-  form.classList = 'data-form';
-
-
-  // helper function
-
-  function createInputElement(textLabel, id, type) {
-
-    const label = document.createElement('label');
-    label.textContent = `${textLabel}`;
-    label.setAttribute('for', id);
-    form.appendChild(label);
-
-    const input = document.createElement('input');
-    input.setAttribute('id', id);
-    input.setAttribute('type', type);
-    input.setAttribute('required', true);
-    form.appendChild(input);
-  }
-
-  createInputElement('Title', 'title', 'text');
-  createInputElement('Author', 'author', 'text');
-  createInputElement('Pages', 'pages', 'number');
-  createInputElement('Read', 'read', 'text');
-
-  // creates sub mission button
-  const submissionBtn = document.createElement('button');
-  submissionBtn.textContent = 'Add Book';
-  submissionBtn.setAttribute('type', 'submit');
-  submissionBtn.setAttribute('class', 'subBtn');
-  form.appendChild(submissionBtn);
+// Event listener for the newBook button
+newBook.addEventListener("click", () => {
+  let form = document.createElement("form");
+  form.classList = "data-form";
+  form.setAttribute("noValidate", true);
+  form.innerHTML = `
+    <label for="title">Title</label>
+    <input id="title" type="text" required />
+    <span id="titleError" class="error"></span>
+    <label for="author">Author</label>
+    <input id="author" type="text" required />
+    <span id="authorError" class="error"></span>
+    <label for="pages">Pages</label>
+    <input id="pages" type="number" required />
+    <span id="pagesError" class="error"></span>
+    <label for="read">Read</label>
+    <input id="read" type="text" required />
+    <span id="readError" class="error"></span>
+    <button type="submit" class="subBtn">Add Book</button>
+  `;
 
   mainContent.append(form);
-  //hidding the newBook btn from the display
-  newBook.style.display = 'none';
+  newBook.style.display = "none";
 
-  submissionBtn.addEventListener('click', (e) => {
-    e.preventDefault();
-    let title = document.querySelector('#title').value;
-    let author = document.querySelector('#author').value;
-    let pages = document.querySelector('#pages').value;
-    let read = document.querySelector('#read').value;
+  const submissionBtn = form.querySelector(".subBtn");
 
-    addBookToLibrary(title, author, pages, read);
-    newBook.style.display = 'block';
-    mainContent.removeChild(form);
+  form.addEventListener("submit", (event) => {
+    event.preventDefault();
+    let valid = true;
+    const title = form.querySelector("#title");
+    const author = form.querySelector("#author");
+    const pages = form.querySelector("#pages");
+    const read = form.querySelector("#read");
 
-    // showing the hidden displayBtn 
-    displayBtn.style.display = 'block';
+    if (!title.value) {
+      valid = false;
+      showError(title, "Title is required");
+    }
+    if (!author.value) {
+      valid = false;
+      showError(author, "Author Name is required");
+    }
+    if (!pages.value) {
+      valid = false;
+      showError(pages, "Pages are required");
+    }
+    if (!read.value) {
+      valid = false;
+      showError(read, "Read status is required");
+    }
+
+    if (valid) {
+      addBookToLibrary(title.value, author.value, pages.value, read.value);
+      newBook.style.display = "block";
+      mainContent.removeChild(form);
+
+      // Show the hidden displayBtn
+      displayBtn.style.display = "block";
+    }
   });
 
+  function showError(input, message) {
+    const errorSpan = input.nextElementSibling;
+    errorSpan.textContent = message;
+    errorSpan.style.color = "red";
+  }
 });
 
-// added an event listener to display button 
-displayBtn.addEventListener('click', display);
+// Event listener for the display button
+displayBtn.addEventListener("click", display);
 
-// function for displaying the books on the page
+// Function for displaying the books on the page
 function display() {
   myLibrary.forEach((item) => {
-    let displayCards = document.createElement('div');
-    displayCards.classList = 'display-card';
+    let displayCards = document.createElement("div");
+    displayCards.classList = "display-card";
 
     createElements(displayCards, item);
     displayContainer.appendChild(displayCards);
 
-    displayBtn.style.display = 'none';
+    displayBtn.style.display = "none";
     myLibrary = [];
-
   });
 }
 
-// its a helper function created for creating elements
-// It's a helper function created for creating elements
+// Helper function for creating elements
 function createElements(container, e) {
-  let title = document.createElement('p');
-  let author = document.createElement('p');
-  let pages = document.createElement('p');
-  let read = document.createElement('p');
+  container.innerHTML = `
 
-  // Setting content in elements
-  title.textContent = `Book Name: ${e.title}`;
-  author.textContent = `Written By: ${e.author}`;
-  pages.textContent = `Contains ${e.pages} Pages`;
-  read.textContent = `Read? : ${e.read}`;
+  <p>Book Name: ${e.title}</p>
+  <p>Written By: ${e.author}</p>
+  <p>Contains ${e.pages} Pages</p>
+  <p>Read? : ${e.read}</p>`;
 
-  container.appendChild(title);
-  container.appendChild(author);
-  container.appendChild(pages);
-  container.appendChild(read);
+  let deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  deleteBtn.classList.add("delete-btn");
+  container.appendChild(deleteBtn);
 
-  let deletBtn = document.createElement('button');
-  deletBtn.textContent = 'Delete';
-  deletBtn.classList.add('delete-btn');
-  container.appendChild(deletBtn);
-
-  deletBtn.addEventListener('click', () => {
+  deleteBtn.addEventListener("click", () => {
     container.remove();
-    displayBtn.style.display = 'block';
+    displayBtn.style.display = "block";
   });
 }
